@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Project Client Questionnaire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            margin: -50px -50px 50px -50px;
+            padding: 60px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px 12px 0 0;
+            color: white;
+        }
+
+        .header-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.95;
+        }
+
+        .section-number i {
+            font-size: 0.9em;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+
+        /* Section Styling */
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            border-left: 4px solid;
+            background: #fafbfc;
+            border-radius: 8px;
+        }
+
+        .section-1 { border-left-color: #5B4AE2; }
+        .section-2 { border-left-color: #00BFA6; }
+        .section-3 { border-left-color: #FF6B9D; }
+        .section-4 { border-left-color: #FFA726; }
+        .section-5 { border-left-color: #42A5F5; }
+        .section-6 { border-left-color: #AB47BC; }
+        .section-7 { border-left-color: #26C6DA; }
+        .section-8 { border-left-color: #66BB6A; }
+        .section-9 { border-left-color: #EF5350; }
+        .section-10 { border-left-color: #7E57C2; }
+
+        .section h2 {
+            color: #1a1a1a;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+
+        .question {
+            margin: 25px 0;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+
+        .question.hidden {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .question.visible {
+            opacity: 1;
+            max-height: 500px;
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .question-helper {
+            display: block;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #5B4AE2;
+            box-shadow: 0 0 0 3px rgba(91, 74, 226, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            border-color: #5B4AE2;
+            background: #f8f7ff;
+        }
+
+        .radio-item input:checked + label,
+        .checkbox-item input:checked + label {
+            font-weight: 600;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #5B4AE2;
+        }
+
+        .radio-item label,
+        .checkbox-item label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .yes-no-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .yes-no-group .radio-item {
+            flex: 1;
+            justify-content: center;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 60px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 30px;
+            }
+            .submit-btn {
+                display: none;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            header {
+                margin: -30px -20px 40px -20px;
+                padding: 40px 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .header-icon {
+                font-size: 3em;
+            }
+            .yes-no-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fas fa-globe header-icon"></i>
+            <h1>Website Project Client Questionnaire</h1>
+            <p class="subtitle">Let's build the perfect website for your business</p>
+        </header>
+
+        <form id="questionnaireForm">
+            
+            <!-- Section 1: Basic Information -->
+            <div class="section section-1">
+                <h2><span class="section-number"><i class="fas fa-building"></i></span> SECTION 1: Basic Business Information</h2>
+                
+                <div class="question">
+                    <label class="question-label" for="businessName">
+                        What's the name of your business or brand?
+                    </label>
+                    <input type="text" id="businessName" name="businessName" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you have an existing website?
+                    </label>
+                    <div class="yes-no-group">
+                        <div class="radio-item">
+                            <input type="radio" id="existingWebsiteYes" name="existingWebsite" value="yes">
+                            <label for="existingWebsiteYes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="existingWebsiteNo" name="existingWebsite" value="no">
+                            <label for="existingWebsiteNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question hidden" id="followup-websiteURL">
+                    <label class="question-label" for="websiteURL">
+                        If yes, what's the URL?
+                    </label>
+                    <input type="url" id="websiteURL" name="websiteURL" placeholder="https://www.example.com">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you already own a domain and hosting?
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="domainBoth" name="domainHosting" value="both">
+                            <label for="domainBoth">Yes, I have both domain and hosting</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="domainOnly" name="domainHosting" value="domain">
+                            <label for="domainOnly">I have a domain only</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="domainNone" name="domainHosting" value="none">
+                            <label for="domainNone">No, I need help with both</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Goals & Purpose -->
+            <div class="section section-2">
+                <h2><span class="section-number"><i class="fas fa-bullseye"></i></span> SECTION 2: Goals & Purpose</h2>
+
+                <div class="question">
+                    <label class="question-label" for="mainGoal">
+                        What is the main goal of the website?
+                        <span class="question-helper">(e.g. promote services, sell products, showcase portfolio)</span>
+                    </label>
+                    <textarea id="mainGoal" name="mainGoal" required></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="visitorAction">
+                        What do you want visitors to do on your site?
+                        <span class="question-helper">(e.g. contact you, make a purchase, book a call)</span>
+                    </label>
+                    <textarea id="visitorAction" name="visitorAction"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 3: Target Audience -->
+            <div class="section section-3">
+                <h2><span class="section-number"><i class="fas fa-users"></i></span> SECTION 3: Target Audience</h2>
+
+                <div class="question">
+                    <label class="question-label" for="targetAudience">
+                        Who is your target audience or ideal customer?
+                    </label>
+                    <textarea id="targetAudience" name="targetAudience" required></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="demographics">
+                        Are there specific locations, age groups, or interests you're focusing on?
+                    </label>
+                    <textarea id="demographics" name="demographics"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 4: Design & Style Preferences -->
+            <div class="section section-4">
+                <h2><span class="section-number"><i class="fas fa-palette"></i></span> SECTION 4: Design & Style Preferences</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you have brand colors, logos, or fonts you'd like to use?
+                    </label>
+                    <div class="yes-no-group">
+                        <div class="radio-item">
+                            <input type="radio" id="brandAssetsYes" name="brandAssets" value="yes">
+                            <label for="brandAssetsYes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="brandAssetsNo" name="brandAssets" value="no">
+                            <label for="brandAssetsNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question hidden" id="followup-brandDetails">
+                    <label class="question-label" for="brandDetails">
+                        If yes, please provide details (colors, font names, etc.)
+                    </label>
+                    <textarea id="brandDetails" name="brandDetails"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="exampleSites">
+                        Are there any websites you like the look of?
+                        <span class="question-helper">(Share links and what you like about them)</span>
+                    </label>
+                    <textarea id="exampleSites" name="exampleSites" placeholder="https://example.com - I like the clean layout and color scheme"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="overallVibe">
+                        What kind of overall vibe should the site have?
+                        <span class="question-helper">(e.g. modern, minimal, luxury, playful, techy)</span>
+                    </label>
+                    <input type="text" id="overallVibe" name="overallVibe" placeholder="e.g., Modern and professional">
+                </div>
+            </div>
+
+            <!-- Section 5: Pages & Structure -->
+            <div class="section section-5">
+                <h2><span class="section-number"><i class="fas fa-file-alt"></i></span> SECTION 5: Pages & Structure</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        What pages do you want on your website?
+                        <span class="question-helper">(Select all that apply)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pageHome" name="pages" value="home" checked>
+                            <label for="pageHome">Home</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pageAbout" name="pages" value="about">
+                            <label for="pageAbout">About</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pageServices" name="pages" value="services">
+                            <label for="pageServices">Services</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pagePortfolio" name="pages" value="portfolio">
+                            <label for="pagePortfolio">Portfolio</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pageBlog" name="pages" value="blog">
+                            <label for="pageBlog">Blog</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pageContact" name="pages" value="contact">
+                            <label for="pageContact">Contact</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="additionalPages">
+                        Any other pages you need?
+                    </label>
+                    <input type="text" id="additionalPages" name="additionalPages" placeholder="e.g., Pricing, Team, Case Studies">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Should there be any special sections or features?
+                        <span class="question-helper">(Select all that apply)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featureTestimonials" name="specialFeatures" value="testimonials">
+                            <label for="featureTestimonials">Testimonials</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featureFAQ" name="specialFeatures" value="faq">
+                            <label for="featureFAQ">FAQ</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featureNewsletter" name="specialFeatures" value="newsletter">
+                            <label for="featureNewsletter">Newsletter signup</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="featureGallery" name="specialFeatures" value="gallery">
+                            <label for="featureGallery">Gallery</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Content -->
+            <div class="section section-6">
+                <h2><span class="section-number"><i class="fas fa-pen"></i></span> SECTION 6: Content</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Will you provide the text and images, or should I help create them?
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="contentProvide" name="contentCreation" value="provide">
+                            <label for="contentProvide">I'll provide all content (text and images)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="contentPartial" name="contentCreation" value="partial">
+                            <label for="contentPartial">I'll provide some, need help with the rest</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="contentHelp" name="contentCreation" value="help">
+                            <label for="contentHelp">I need help creating content</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you have existing branding materials?
+                        <span class="question-helper">(logos, photos, videos, icons)</span>
+                    </label>
+                    <div class="yes-no-group">
+                        <div class="radio-item">
+                            <input type="radio" id="materialsYes" name="brandingMaterials" value="yes">
+                            <label for="materialsYes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="materialsNo" name="brandingMaterials" value="no">
+                            <label for="materialsNo">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Functionality -->
+            <div class="section section-7">
+                <h2><span class="section-number"><i class="fas fa-cog"></i></span> SECTION 7: Functionality</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you need any of these features?
+                        <span class="question-helper">(Select all that apply)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcEcommerce" name="functionality" value="ecommerce">
+                            <label for="funcEcommerce">Online store / payments</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcBooking" name="functionality" value="booking">
+                            <label for="funcBooking">Booking system</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcContact" name="functionality" value="contact">
+                            <label for="funcContact">Contact form</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcSearch" name="functionality" value="search">
+                            <label for="funcSearch">Search bar</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcLogin" name="functionality" value="login">
+                            <label for="funcLogin">User login or memberships</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="funcMultilang" name="functionality" value="multilingual">
+                            <label for="funcMultilang">Multilingual support</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="integrations">
+                        Any integrations needed?
+                        <span class="question-helper">(e.g. email marketing, analytics, CRM)</span>
+                    </label>
+                    <textarea id="integrations" name="integrations" placeholder="e.g., Mailchimp, Google Analytics, Salesforce"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 8: Technical Details -->
+            <div class="section section-8">
+                <h2><span class="section-number"><i class="fas fa-laptop-code"></i></span> SECTION 8: Technical Details</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Should the site be optimized for SEO?
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="optSEO" name="optimization" value="yes">
+                            <label for="optSEO">Yes, SEO optimization</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="optNeither" name="optimization" value="no">
+                            <label for="optNeither">No, not a priority</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Timeline -->
+            <div class="section section-9">
+                <h2><span class="section-number"><i class="fas fa-calendar-alt"></i></span> SECTION 9: Timeline</h2>
+
+                <div class="question">
+                    <label class="question-label" for="launchDate">
+                        What's your ideal launch date?
+                    </label>
+                    <input type="text" id="launchDate" name="launchDate" placeholder="e.g., End of December 2025">
+                </div>
+            </div>
+
+            <!-- Section 10: Maintenance & Updates -->
+            <div class="section section-10">
+                <h2><span class="section-number"><i class="fas fa-tools"></i></span> SECTION 10: Maintenance & Updates</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Will you need ongoing maintenance or training to manage the site after it's launched?
+                    </label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="maintBoth" name="maintenance" value="both">
+                            <label for="maintBoth">Yes, both maintenance and training</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="maintMaintenance" name="maintenance" value="maintenance">
+                            <label for="maintMaintenance">Maintenance only</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="maintTraining" name="maintenance" value="training">
+                            <label for="maintTraining">Training only</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="maintNo" name="maintenance" value="no">
+                            <label for="maintNo">No, I'll manage it myself</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="additionalNotes">
+                        Any additional notes or special requirements?
+                    </label>
+                    <textarea id="additionalNotes" name="additionalNotes" placeholder="Share any other details, concerns, or ideas..."></textarea>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit Questionnaire</button>
+            </div>
+
+        </form>
+
+        <footer>
+            <p>&copy; 2025 Website Project Discovery | Thank you for taking the time to complete this questionnaire</p>
+        </footer>
+    </div>
+
+    <script>
+        // Conditional Logic for Yes/No Questions
+        function setupConditionalLogic() {
+            // Helper function to show/hide followup questions with animation
+            function toggleFollowup(followupElement, show, inputToClear = null) {
+                if (show) {
+                    followupElement.classList.remove('hidden');
+                    followupElement.classList.add('visible');
+                } else {
+                    followupElement.classList.remove('visible');
+                    followupElement.classList.add('hidden');
+                    if (inputToClear) {
+                        inputToClear.value = ''; // Clear value when hidden
+                    }
+                }
+            }
+
+            // Question 1: Do you have an existing website? -> If yes, show URL field
+            const existingWebsiteRadios = document.querySelectorAll('input[name="existingWebsite"]');
+            const websiteURLFollowup = document.getElementById('followup-websiteURL');
+            const websiteURLInput = document.getElementById('websiteURL');
+            
+            existingWebsiteRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    toggleFollowup(
+                        websiteURLFollowup, 
+                        this.value === 'yes' && this.checked,
+                        this.value === 'no' ? websiteURLInput : null
+                    );
+                });
+            });
+
+            // Question 2: Do you have brand colors, logos, or fonts? -> If yes, show details field
+            const brandAssetsRadios = document.querySelectorAll('input[name="brandAssets"]');
+            const brandDetailsFollowup = document.getElementById('followup-brandDetails');
+            const brandDetailsInput = document.getElementById('brandDetails');
+            
+            brandAssetsRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    toggleFollowup(
+                        brandDetailsFollowup, 
+                        this.value === 'yes' && this.checked,
+                        this.value === 'no' ? brandDetailsInput : null
+                    );
+                });
+            });
+        }
+
+        // Initialize conditional logic when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupConditionalLogic();
+        });
+
+        // Form submission handler
+        document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            console.log('Questionnaire Data:', data);
+            alert('Thank you for completing the questionnaire! Your responses have been recorded.');
+            
+            // In production, you would send this data to your server
+            // fetch('/api/questionnaire', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+        });
+    </script>
+</body>
+</html>
